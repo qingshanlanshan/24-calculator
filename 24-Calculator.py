@@ -1,7 +1,10 @@
 import sys
 
+g_stop = False
 math_ops = ['+', '-', '*', '/', '&', '|', '^', '<<', '>>']
 def calculate_24(target, input):
+    global g_stop
+    g_stop=False
     cal([], input, 0, 0, 2*len(input)-1, target)
 
 
@@ -23,15 +26,16 @@ def evaluate(list, target):
     try:
         if eval(stack[0])==target:
             print("{}={}".format(target,stack[0]))
-            sys.exit(0)
-    except SystemExit:
-        sys.exit(0)
+            global g_stop
+            g_stop=True
     except:
         pass
             
 
 
 def cal(stack, input, n_op, n_num, max_stack_len, target):
+    if g_stop:
+        return
     if len(stack) == max_stack_len:
         evaluate(stack, target)
         return
@@ -45,4 +49,10 @@ def cal(stack, input, n_op, n_num, max_stack_len, target):
 
 
 if __name__ == "__main__":
-    calculate_24(24, [4,10,7,12])
+    line=""
+    while True:
+        line=input()
+        line = [int(i) for i in line.split()]
+        calculate_24(24, line)
+        
+    
