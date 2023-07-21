@@ -6,6 +6,8 @@ def calculate_24(target, input):
     global g_stop
     g_stop=False
     cal([], input, 0, 0, 2*len(input)-1, target)
+    if g_stop==False:
+        print("No answer")
 
 
 def evaluate(list, target):
@@ -25,7 +27,7 @@ def evaluate(list, target):
         return
     try:
         if eval(stack[0])==target:
-            print("{}={}".format(target,stack[0]))
+            print("={}".format(stack[0]))
             global g_stop
             g_stop=True
     except:
